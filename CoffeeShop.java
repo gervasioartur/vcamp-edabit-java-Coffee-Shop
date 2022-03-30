@@ -31,15 +31,17 @@ public class CoffeeShop {
 			//putting all names in lowercase an removing the white spaces	
 			String itemName = item.getItem().toLowerCase().replaceAll(" ","");
 			String orderName = name.toLowerCase().replaceAll(" ", "");
-		
+			
 			if(itemName.equals(orderName)) {
 				containItem = true;
 				break;	
 			}
 		}
 		
+		//sendind a message to the user when the item is not on the menu
 		if(!containItem)  return "This item is currently unavailable!";
 		
+		//adding ne order
 		int newOrderListLength = this.order.length+1;
 		String orderAux[] = this.order;
 		this.order =  new String[newOrderListLength];
@@ -53,6 +55,7 @@ public class CoffeeShop {
 	}
 	
 	public String fulfillOrder() {
+		//checking if the order list is greater than 0, if its tru we can fullfill order
 		if(this.order.length > 0) {	
 			int orderLength = order.length;
 			String firstOrder = this.order[0];
@@ -76,7 +79,6 @@ public class CoffeeShop {
 		//getting menu items price by order name
 		double total = 0.0;
 		if(order.length ==0 ) return total;
-		MenuItem menuListOrder [] = new MenuItem[order.length];
 		for(String orderItemName: order) {
 			for(int i = 0; i < menu.length; i++) {
 				//putting all names in lowercase an removing the white spaces	
@@ -95,7 +97,7 @@ public class CoffeeShop {
 	public String cheapestItem() {
 		MenuItem cheapestItemOnMenu = menu[0];
 		double cheapestValue = menu[0].getPrice();
-		
+		//getting the cheapst item 
 		for(MenuItem item: menu) {
 			if(item.getPrice() < cheapestValue) {
 				cheapestValue = item.getPrice();
@@ -107,7 +109,7 @@ public class CoffeeShop {
 	
 	public String[] drinksOnly() {
 		String namesOfDrinks[] = new String[0];
-				
+		//getting all drink items		
 		for(MenuItem item: menu) {
 			if(item.getType().toLowerCase().equals("drink")) {
 				String namesAux[] = namesOfDrinks;
@@ -123,7 +125,7 @@ public class CoffeeShop {
 	
 	public String[] foodOnly() {
 		String namesOfFoods[] = new String[0];
-				
+			//getting all food items	
 		for(MenuItem item: menu) {
 			if(item.getType().toLowerCase().equals("food")) {
 				String namesAux[] = namesOfFoods;
